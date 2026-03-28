@@ -121,6 +121,9 @@
             sqls = {
               enable = true;
             };
+            verible = {
+              enable = true;
+            };
             gopls = {
               enable = true;
               settings = {
