@@ -216,6 +216,18 @@
           };
           undotree.enable = true;
           fugitive.enable = true;
+          mini-diff = {
+            enable = true;
+            settings = {
+              view.style = "sign";
+              mappings = {
+                goto_first = "<leader>ggh";
+                goto_next = "<leader>h";
+                goto_prev = "<leader>H";
+                goto_last = "<leader>Gh";
+              };
+            };
+          };
           commentary.enable = true;
           vim-surround.enable = true;
           lsp = {
@@ -322,6 +334,31 @@
           {
             key = "<leader>gs";
             action = ":Git<CR>";
+            mode = "n";
+          }
+          {
+            key = "<leader>gq";
+            action.__raw = ''
+              function()
+                local items = {}
+                for _, line in ipairs(vim.fn.systemlist({ "git", "status", "--short" })) do
+                  local filename = vim.trim(string.sub(line, 4))
+                  if filename ~= "" then
+                    table.insert(items, {
+                      filename = filename,
+                      lnum = 1,
+                      col = 1,
+                      text = string.sub(line, 1, 2),
+                    })
+                  end
+                end
+                vim.fn.setqflist({}, "r", {
+                  title = "Git changed files",
+                  items = items,
+                })
+                vim.cmd("Trouble quickfix toggle")
+              end
+            '';
             mode = "n";
           }
           {
