@@ -149,7 +149,7 @@
             enable = true;
             texlivePackage = pkgs.texlive.combined.scheme-full;
             settings = {
-              view_method = "zathura";
+              view_method = "sioyek";
               compiler_method = "latexmk";
               compiler_latexmk = {
                 continuous = 1;
