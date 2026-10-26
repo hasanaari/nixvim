@@ -125,6 +125,7 @@
       };
 
       nixvimConfig = {
+        nixpkgs.source = nixpkgs;
         colorschemes.nightfox = {
           enable = true;
         };
@@ -147,7 +148,7 @@
           };
           vimtex = {
             enable = true;
-            texlivePackage = pkgs.texlive.combined.scheme-full;
+            texlivePackage = pkgs.texliveFull;
             settings = {
               view_method = "sioyek";
               compiler_method = "latexmk";
